@@ -1,0 +1,50 @@
+﻿<h2>New post</h2>
+
+<div class="container">
+	<div class="pad">
+		<form id="pizza-create-form">
+			<div class="form-field">
+				<label class="form-label" for="name">Nome</label>
+				<input class="form-control" id="name" />
+				<span id="name-errors" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label class="form-label" for="description">Descrizione</label>
+				<textarea class="form-control" id="description"></textarea>
+				<span id="description-errors" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label class="form-label" for="foto">Image source</label>
+				<input class="form-control" id="foto" value="https://picsum.photos/200/300" />
+				<span id="foto-errors" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label class="form-label" for="category-id">Category</label>
+				<select class="form-control" id="category-id">
+					<option value="0"></option>
+				</select>
+				<span id="category-id-errors" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label class="form-label" for="prezzo">Prezzo</label>
+				<input class="form-control" id="prezzo" />
+				<span id="prezzo-errors" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label class="form-label" for="ingrediente">Ingredienti</label>
+				<div id="ingredienti"></div>
+			</div>
+			
+			<button id="submit-form" type="submit">Create</button>
+		</form>
+	</div>
+</div>
+
+@section Scripts
+	{
+	<script>
+		loadIngredienti();
+		loadCategories();
+		initCreateForm();
+	</script>
+}

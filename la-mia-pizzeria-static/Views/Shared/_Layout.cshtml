@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/la_mia_pizzeria_static.styles.css" asp-append-version="true" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <header>
@@ -16,6 +17,7 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="@Url.Action("Index","User")">Admin</a>
                         <a class="nav-link text-dark" href="@Url.Action("Create", "Pizza")">Aggiungi Pizza</a>
+                        <a class="nav-link text-dark" href="@Url.Action("ApiIndex", "Pizza")">Api view</a>
                         <a class="navbar-brand" asp-area="" asp-controller="Pizza" asp-action="Index">Benvenuti da Michele</a>
                     </li>
                     <!-- code omitted-->

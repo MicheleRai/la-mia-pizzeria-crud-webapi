@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+
+
+}
+
+<main class="pt-4">
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="mb-2">
+            <a class="btn btn-success" href="@Url.Action("ApiCreate", "Pizza")"> Add pizza</a>
+        </div>
+    }
+
+    <div class="container">
+        @*pizza container*@
+        <div id="cards" class="d-flex justify-content-center row row-cols-2 flex-wrap"></div>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        initialize();
+    </script>
+}
+
+
+

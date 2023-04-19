@@ -1,6 +1,7 @@
 ﻿using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_static.API
@@ -20,14 +21,17 @@ namespace la_mia_pizzeria_static.API
         public IActionResult GetPizza([FromQuery] string? nome, float? prezzo)
         {
             var pizze = _context.Pizze
-                .Where(p => (nome == null && prezzo == null) || (nome != null && p.Name.ToLower().Contains(nome.ToLower())) || (prezzo != null && p.Prezzo == Convert.ToUInt32(prezzo)))
+				.Include(p => p.Category)
+				.Where(p => (nome == null && prezzo == null) || (nome != null && p.Name.ToLower().Contains(nome.ToLower())) || (prezzo != null && p.Prezzo == Convert.ToUInt32(prezzo)))
                 .ToList();
 
-            return Ok(pizze);
+			foreach (var post in pizze) post.Category!.Pizze = null;
+
+			return Ok(pizze);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPost(int id)
+        public IActionResult GetPizza(int id)
         {
             var pizza = _context.Pizze.FirstOrDefault(p => p.Id == id);
 
@@ -40,7 +44,7 @@ namespace la_mia_pizzeria_static.API
         }
 
         [HttpPost]
-        public IActionResult CreatePost(Pizza pizza)
+        public IActionResult CreatePizza(Pizza pizza)
         {
             _context.Pizze.Add(pizza);
             _context.SaveChanges();
@@ -70,7 +74,7 @@ namespace la_mia_pizzeria_static.API
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletePost(int id)
+        public IActionResult DeletePizza(int id)
         {
             var savedPizza = _context.Pizze.FirstOrDefault(p => p.Id == id);
 
