@@ -25,8 +25,10 @@ const pizzaComponent = pizza => `
                 <p class="card-text">${pizza.description}</p>
                 <p class="fw-bold">${pizza.prezzo} €</p>
                 <div class="buttonContainer d-inline-flex">
+                    <!--
                     <a class="btn btn-primary " href="@Url.Action(" Dettagli", "Pizza", new{Id = @pizza.Id })">Dettagli</a>
                     <a class="btn btn-warning mx-2" href="@Url.Action(" Update", "Pizza", new {Id = @pizza.Id })">Edit</a>
+                    -->
                     <button onClick="deletePizza(${pizza.id})" type="submit" class="btn btn-danger">Delete</button>
                 </div>
 
@@ -35,7 +37,7 @@ const pizzaComponent = pizza => `
     </div >`;
 
 function deletePizza(id) {
-    axios.delete('/Api/Pizza/${id}')
+    axios.delete(`/Api/Pizza/${id}`)
         .then(function (response) {
             console.log(response)
         }).catch(function (error) {
@@ -124,11 +126,11 @@ const getPizzaFromForm = form => {
 };
 
 const renderErrors = errors => {
-    const nameeErrors = document.querySelector("#name-errors");
-    const descriptionErrors = document.querySelector("#description-errors");
+    const nomeErrors = document.querySelector("#name-errors");
+    const descrizioneErrors = document.querySelector("#description-errors");
     const fotoErrors = document.querySelector('#foto-error');
     const prezzoErrors = document.querySelector('#prezzo-error');
-    const categoryIdErrors = document.querySelector("#category-id-errors");
+    const categoriaIdErrors = document.querySelector("#category-id-errors");
 
     nomeErrors.innerText = errors.Nome?.join('\n') ?? '';
     descrizioneErrors.innerText = errors.Descrizione?.join('\n') ?? '';
